@@ -1,0 +1,28 @@
+{
+  "name": "setup-aiken",
+  "version": "1.0.0",
+  "description": "Set up a specific version of Aiken and add the command-line tools to the PATH",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build src/main.js --no-cache",
+    "test": "node test/main.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aiken-lang/setup.git"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/aiken-lang/setup/issues"
+  },
+  "homepage": "https://github.com/aiken-lang/setup#readme",
+  "devDependencies": {
+    "@vercel/ncc": "^0.36.1",
+    "prettier": "^2.8.8"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/tool-cache": "^2.0.1",
+    "semver": "^7.5.0"
+  }
+}
