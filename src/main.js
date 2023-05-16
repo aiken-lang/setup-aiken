@@ -28,7 +28,7 @@ async function main() {
 
       const extractPath = await tc.extractTar(tarPath, undefined, ["xzC"]);
 
-      cachedPath = await tc.cacheDir(extractPath, "aiken", fullVersion);
+      cachedPath = await tc.cacheDir(extractPath, "aiken", version);
     }
 
     core.addPath(cachedPath);
