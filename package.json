@@ -4,7 +4,7 @@
   "description": "Set up a specific version of Aiken and add the command-line tools to the PATH",
   "main": "index.js",
   "scripts": {
-    "build": "ncc build src/main.js --no-cache",
+    "build": "ncc build src/main.js --no-cache --license licenses.txt",
     "test": "node test/main.test.js"
   },
   "repository": {
