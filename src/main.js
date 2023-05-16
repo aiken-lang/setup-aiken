@@ -5,8 +5,6 @@ main().catch((err) => {
   core.setFailed(err.message);
 });
 
-const baseDownloadUrl = "https://github.com/aiken-lang/aiken/releases/download";
-
 async function main() {
   let version = core.getInput("version", {
     required: true,
@@ -15,12 +13,17 @@ async function main() {
 
   core.startGroup(`Installing Aiken ${version}`);
 
+  const arch = process.arch === "x64" ? "amd64" : process.arch;
+
   try {
     let cachedPath = tc.find("aiken", version);
 
     if (!cachedPath) {
+      const baseDownloadUrl =
+        "https://github.com/aiken-lang/aiken/releases/download";
+
       const tarPath = await tc.downloadTool(
-        `${baseDownloadUrl}/${version}/aiken_${version}_${process.platform}_${process.arch}.tar.gz`,
+        `${baseDownloadUrl}/${version}/aiken_${version}_${process.platform}_${arch}.tar.gz`,
       );
 
       const extractPath = await tc.extractTar(tarPath, undefined, ["xzC"]);
@@ -33,7 +36,7 @@ async function main() {
     core.exportVariable("INSTALL_DIR_FOR_AIKEN", cachedPath);
   } catch (err) {
     core.error(
-      `Aiken install failed for platform '${process.platform}' on arch '${process.arch}'`,
+      `Aiken install failed for platform '${process.platform}' on arch '${arch}'`,
     );
 
     core.error(`${err}\n${err.stack}`);
