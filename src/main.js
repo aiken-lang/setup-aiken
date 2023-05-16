@@ -20,7 +20,7 @@ async function main() {
 
     if (!cachedPath) {
       const tarPath = await tc.downloadTool(
-        `${baseDownloadUrl}/${version}/aiken_${version}_${process.platform}_${platform.arch}.tar.gz`,
+        `${baseDownloadUrl}/${version}/aiken_${version}_${process.platform}_${process.arch}.tar.gz`,
       );
 
       const extractPath = await tc.extractTar(tarPath, undefined, ["xzC"]);
@@ -33,7 +33,7 @@ async function main() {
     core.exportVariable("INSTALL_DIR_FOR_AIKEN", cachedPath);
   } catch (err) {
     core.error(
-      `Aiken install failed for platform '${process.platform}' on arch '${platform.arch}'`,
+      `Aiken install failed for platform '${process.platform}' on arch '${process.arch}'`,
     );
 
     core.error(`${err}\n${err.stack}`);
