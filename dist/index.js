@@ -6747,7 +6747,7 @@ async function main() {
 
     if (!cachedPath) {
       const tarPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.downloadTool(
-        `${baseDownloadUrl}/${version}/aiken_${version}_${process.platform}_${platform.arch}.tar.gz`,
+        `${baseDownloadUrl}/${version}/aiken_${version}_${process.platform}_${process.arch}.tar.gz`,
       );
 
       const extractPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.extractTar(tarPath, undefined, ["xzC"]);
@@ -6760,7 +6760,7 @@ async function main() {
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.exportVariable("INSTALL_DIR_FOR_AIKEN", cachedPath);
   } catch (err) {
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(
-      `Aiken install failed for platform '${process.platform}' on arch '${platform.arch}'`,
+      `Aiken install failed for platform '${process.platform}' on arch '${process.arch}'`,
     );
 
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`${err}\n${err.stack}`);
