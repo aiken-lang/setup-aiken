@@ -11,9 +11,24 @@ async function main() {
     trimWhitespace: true,
   });
 
+  const useCargoDist = version >= "v1.0.28";
+
+  if (useCargoDist) {
+    core.info("Detected recent Aiken version using cargo-dist...");
+  }
+
   core.startGroup(`Installing Aiken ${version}`);
 
   const arch = process.arch === "x64" ? "amd64" : process.arch;
+  core.info(`Assuming arch: ${arch}`);
+
+  const platform = useCargoDist
+    ? { "linux": "unknown-linux-gnu"
+      , "darwin": "apple-darwin"
+      , "windows": "pc-windows-msvc"
+      }[process.platform]
+    : process.platform;
+  core.info(`Assuming platform: ${platform}`);
 
   try {
     let cachedPath = tc.find("aiken", version);
@@ -22,8 +37,9 @@ async function main() {
       const baseDownloadUrl =
         "https://github.com/aiken-lang/aiken/releases/download";
 
-      const tarPath = await tc.downloadTool(
-        `${baseDownloadUrl}/${version}/aiken_${version}_${process.platform}_${arch}.tar.gz`,
+      const tarPath = await tc.downloadTool(version >= USE_CARGO_DIST
+	? `${baseDownloadUrl}/${version}/aiken-${arch}-${version}-${platform}.tar.gz`
+        : `${baseDownloadUrl}/${version}/aiken_${version}_${platform}_${arch}.tar.gz`
       );
 
       const extractPath = await tc.extractTar(tarPath, undefined, ["xzC"]);
@@ -35,8 +51,9 @@ async function main() {
 
     core.exportVariable("INSTALL_DIR_FOR_AIKEN", cachedPath);
   } catch (err) {
+
     core.error(
-      `Aiken install failed for platform '${process.platform}' on arch '${arch}'`,
+      `Aiken==${version} install failed for platform '${platform}' on arch '${arch}'`,
     );
 
     core.error(`${err}\n${err.stack}`);
