@@ -52,7 +52,12 @@ async function main() {
 
       const extractPath = await tc.extractTar(tarPath, undefined, ["xzC"]);
 
-      cachedPath = await tc.cacheDir(extractPath, "aiken", version);
+      cachedPath = await tc.cacheDir(useCargoDist
+        ? core.toPlatformPath(`${extractPath}/aiken-${arch}-${platform}`)
+        : extractPath,
+        "aiken",
+        version
+      );
     }
 
     core.addPath(cachedPath);

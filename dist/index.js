@@ -30784,7 +30784,12 @@ async function main() {
 
       const extractPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.extractTar(tarPath, undefined, ["xzC"]);
 
-      cachedPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.cacheDir(extractPath, "aiken", version);
+      cachedPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.cacheDir(useCargoDist
+        ? _actions_core__WEBPACK_IMPORTED_MODULE_0__.toPlatformPath(`${extractPath}/aiken-${arch}-${platform}`)
+        : extractPath,
+        "aiken",
+        version
+      );
     }
 
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.addPath(cachedPath);
