@@ -42,10 +42,13 @@ async function main() {
       const baseDownloadUrl =
         "https://github.com/aiken-lang/aiken/releases/download";
 
-      const tarPath = await tc.downloadTool(version >= useCargoDist
+      const downloadUrl = useCargoDist
 	? `${baseDownloadUrl}/${version}/aiken-${arch}-${version}-${platform}.tar.gz`
-        : `${baseDownloadUrl}/${version}/aiken_${version}_${platform}_${arch}.tar.gz`
-      );
+        : `${baseDownloadUrl}/${version}/aiken_${version}_${platform}_${arch}.tar.gz`;
+
+      core.info(`Fetching ${downloadUrl}`);
+
+      const tarPath = await tc.downloadTool(downloadUrl);
 
       const extractPath = await tc.extractTar(tarPath, undefined, ["xzC"]);
 
