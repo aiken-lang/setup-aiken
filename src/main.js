@@ -43,7 +43,7 @@ async function main() {
         "https://github.com/aiken-lang/aiken/releases/download";
 
       const downloadUrl = useCargoDist
-	? `${baseDownloadUrl}/${version}/aiken-${arch}-${version}-${platform}.tar.gz`
+	? `${baseDownloadUrl}/${version}/aiken-${arch}-${platform}.tar.gz`
         : `${baseDownloadUrl}/${version}/aiken_${version}_${platform}_${arch}.tar.gz`;
 
       core.info(`Fetching ${downloadUrl}`);
