@@ -1,6 +1,6 @@
 {
   "name": "setup-aiken",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Set up a specific version of Aiken and add the command-line tools to the PATH",
   "main": "index.js",
   "scripts": {

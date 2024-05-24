@@ -30751,7 +30751,12 @@ async function main() {
 
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.startGroup(`Installing Aiken ${version}`);
 
-  const arch = process.arch === "x64" ? "amd64" : process.arch;
+  let arch;
+  if (useCargoDist) {
+    arch = process.arch === "x64" ? "x86_64" : "aarch64";
+  } else {
+    arch = process.arch === "x64" ? "amd64" : process.arch;
+  }
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Assuming arch: ${arch}`);
 
   const platform = useCargoDist
@@ -30769,7 +30774,7 @@ async function main() {
       const baseDownloadUrl =
         "https://github.com/aiken-lang/aiken/releases/download";
 
-      const tarPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.downloadTool(version >= USE_CARGO_DIST
+      const tarPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.downloadTool(version >= useCargoDist
 	? `${baseDownloadUrl}/${version}/aiken-${arch}-${version}-${platform}.tar.gz`
         : `${baseDownloadUrl}/${version}/aiken_${version}_${platform}_${arch}.tar.gz`
       );
