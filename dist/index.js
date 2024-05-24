@@ -30774,10 +30774,13 @@ async function main() {
       const baseDownloadUrl =
         "https://github.com/aiken-lang/aiken/releases/download";
 
-      const tarPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.downloadTool(version >= useCargoDist
+      const downloadUrl = useCargoDist
 	? `${baseDownloadUrl}/${version}/aiken-${arch}-${version}-${platform}.tar.gz`
-        : `${baseDownloadUrl}/${version}/aiken_${version}_${platform}_${arch}.tar.gz`
-      );
+        : `${baseDownloadUrl}/${version}/aiken_${version}_${platform}_${arch}.tar.gz`;
+
+      _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Fetching ${downloadUrl}`);
+
+      const tarPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.downloadTool(downloadUrl);
 
       const extractPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.extractTar(tarPath, undefined, ["xzC"]);
 
