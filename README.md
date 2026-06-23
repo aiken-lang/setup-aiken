@@ -19,7 +19,7 @@ The version of Aiken that was installed.
 ```yaml
 uses: aiken-lang/setup-aiken@v1
 with:
-  version: v1.0.28-alpha
+  version: v1.1.22
 run: aiken fmt --check
 run: aiken check
 ```
